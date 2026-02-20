@@ -10,14 +10,10 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    /* ══════════════════════════════
-       VARIABLES
-    ══════════════════════════════ */
     :root {
       --bg: #090b10;
       --surface: #10131e;
       --surface2: #161928;
-      --surface3: #1e2235;
       --border: rgba(255,255,255,0.07);
       --accent: #6c63ff;
       --accent2: #a78bfa;
@@ -30,549 +26,401 @@
       --nav-h: 68px;
     }
 
-    /* ══════════════════════════════
-       RESET & BASE
-    ══════════════════════════════ */
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100dvh;
-      line-height: 1.65;
-      overflow-x: hidden;
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      background:var(--bg); color:var(--text);
+      min-height:100dvh; line-height:1.65; overflow-x:hidden;
+      padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 16px);
     }
 
-    /* ══════════════════════════════
-       HERO
-    ══════════════════════════════ */
+    /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #0d0a2e 0%, #141060 50%, #1a1440 100%);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      padding: 56px 20px 44px;
+      background:linear-gradient(160deg,#0d0a2e 0%,#141060 50%,#1a1440 100%);
+      text-align:center; position:relative; overflow:hidden;
+      padding:52px 20px 40px;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 55% at 50% -5%, rgba(108,99,255,.35) 0%, transparent 70%);
-      pointer-events: none;
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(108,99,255,.35) 0%,transparent 70%);
+      pointer-events:none;
     }
     .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 48px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
+      content:''; position:absolute; bottom:0; left:0; right:0;
+      height:48px; background:linear-gradient(to bottom,transparent,var(--bg));
     }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(108,99,255,.2);
-      border: 1px solid rgba(108,99,255,.4);
-      color: var(--accent2);
-      padding: 5px 14px; border-radius: 999px;
-      font-size: 12px; font-weight: 600;
-      margin-bottom: 18px; letter-spacing: .3px;
+      display:inline-flex; align-items:center; gap:7px;
+      background:rgba(108,99,255,.2); border:1px solid rgba(108,99,255,.4);
+      color:var(--accent2); padding:5px 14px; border-radius:999px;
+      font-size:12px; font-weight:600; margin-bottom:18px;
     }
     .hero h1 {
-      font-weight: 800;
-      background: linear-gradient(150deg, #fff 20%, var(--accent2) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.15; letter-spacing: -.5px;
-      margin-bottom: 12px;
+      font-size:30px; font-weight:800;
+      background:linear-gradient(150deg,#fff 20%,var(--accent2) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text; line-height:1.15; letter-spacing:-.5px; margin-bottom:12px;
     }
-    .hero-sub {
-      color: var(--muted);
-      max-width: 460px; margin: 0 auto 24px;
-    }
-    .hero-chips {
-      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-    }
+    .hero-sub { color:var(--muted); font-size:14px; max-width:460px; margin:0 auto 24px; }
+    .hero-chips { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
     .chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 12px; color: #c4cce6;
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      border-radius:999px; padding:5px 12px; font-size:12px; color:#c4cce6;
     }
-    .chip .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-    .dot-green { background: var(--green); box-shadow: 0 0 5px var(--green); }
-    .dot-blue  { background: #60a5fa;      box-shadow: 0 0 5px #60a5fa; }
+    .chip .dot { width:6px; height:6px; border-radius:50%; display:inline-block; }
+    .dot-green { background:var(--green); box-shadow:0 0 5px var(--green); }
+    .dot-blue  { background:#60a5fa; box-shadow:0 0 5px #60a5fa; }
 
-    /* ══════════════════════════════
-       LAYOUT
-    ══════════════════════════════ */
-    .page-wrap {
-      margin: 0 auto;
-      padding: 24px 16px 40px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
+    /* ── LAYOUT ── */
+    .page-wrap { margin:0 auto; padding:20px 14px 20px; display:flex; flex-direction:column; gap:12px; }
 
-    /* ══════════════════════════════
-       CARD
-    ══════════════════════════════ */
+    /* ── CARD ── */
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 20px;
-      transition: border-color .25s;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:22px 20px;
+      transition:border-color .25s;
+      animation:slideUp .35s ease both;
     }
-    .card:hover { border-color: rgba(108,99,255,.22); }
+    .card:hover { border-color:rgba(108,99,255,.22); }
+    .card:nth-child(2){animation-delay:.05s} .card:nth-child(3){animation-delay:.10s}
+    .card:nth-child(4){animation-delay:.15s} .card:nth-child(5){animation-delay:.20s}
+    .card:nth-child(6){animation-delay:.25s} .card:nth-child(7){animation-delay:.30s}
+    .card:nth-child(8){animation-delay:.35s}
 
-    .card-header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 18px;
+    @keyframes slideUp {
+      from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)}
     }
+
+    .card-header { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
     .card-icon {
-      width: 40px; height: 40px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
+      width:40px; height:40px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; flex-shrink:0;
     }
-    .icon-purple { background: rgba(108,99,255,.15); }
-    .icon-green  { background: rgba(34,211,165,.12); }
-    .icon-yellow { background: rgba(251,191,36,.12); }
-    .icon-red    { background: rgba(248,113,113,.12); }
-    .icon-blue   { background: rgba(96,165,250,.12); }
+    .icon-purple{background:rgba(108,99,255,.15)} .icon-green{background:rgba(34,211,165,.12)}
+    .icon-yellow{background:rgba(251,191,36,.12)}  .icon-red{background:rgba(248,113,113,.12)}
+    .icon-blue{background:rgba(96,165,250,.12)}
+    .card-title    { font-size:16px; font-weight:700; color:#fff; line-height:1.2; }
+    .card-subtitle { font-size:12px; color:var(--muted); margin-top:2px; }
 
-    .card-title    { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.2; }
-    .card-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-    /* ══════════════════════════════
-       RULE LIST
-    ══════════════════════════════ */
-    .rule-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    /* ── RULE LIST ── */
+    .rule-list { list-style:none; display:flex; flex-direction:column; gap:12px; }
     .rule-list li {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 14px; color: #b8c0d8; line-height: 1.55;
+      display:flex; gap:10px; align-items:flex-start;
+      font-size:14px; color:#b8c0d8; line-height:1.55;
     }
-    .rule-list li::before {
-      content: '—'; color: var(--accent2); flex-shrink: 0; margin-top: 1px;
-    }
+    .rule-list li::before { content:'—'; color:var(--accent2); flex-shrink:0; margin-top:1px; }
 
-    /* ══════════════════════════════
-       TARIFF TABS
-    ══════════════════════════════ */
-    .tariff-tabs {
-      display: flex; gap: 8px; margin-bottom: 18px;
-    }
+    /* ── TABS (shared by tariff + faq) ── */
+    .tab-switcher { display:flex; gap:8px; margin-bottom:18px; }
     .tab-btn {
-      flex: 1;
-      padding: 9px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      font-size: 13px; font-weight: 600;
-      cursor: pointer; font-family: 'Inter', sans-serif;
-      transition: all .2s;
-      text-align: center;
+      flex:1; padding:9px 10px; border-radius:10px;
+      border:1px solid var(--border); background:var(--surface2);
+      color:var(--muted); font-size:13px; font-weight:600;
+      cursor:pointer; font-family:'Inter',sans-serif; transition:all .2s; text-align:center;
     }
     .tab-btn.active {
-      background: rgba(108,99,255,.15);
-      border-color: rgba(108,99,255,.4);
-      color: var(--accent2);
+      background:rgba(108,99,255,.15); border-color:rgba(108,99,255,.4); color:var(--accent2);
     }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
 
-    /* ══════════════════════════════
-       CONDITIONS GRID
-    ══════════════════════════════ */
-    .cond-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+    /* ── CONDITIONS GRID ── */
+    .cond-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .cond-item {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 13px 14px;
+      background:var(--surface2); border:1px solid var(--border);
+      border-radius:12px; padding:13px 14px;
     }
-    .cond-label { font-size: 11px; color: var(--muted); margin-bottom: 3px; line-height: 1.3; }
-    .cond-value { font-size: 16px; font-weight: 700; color: #fff; }
-    .cond-item.full { grid-column: 1 / -1; }
-    .cond-full-text { font-size: 13px; color: #b8c0d8; font-weight: 400; line-height: 1.5; }
+    .cond-label { font-size:11px; color:var(--muted); margin-bottom:3px; line-height:1.3; }
+    .cond-value { font-size:16px; font-weight:700; color:#fff; }
+    .cond-item.full { grid-column:1/-1; }
+    .cond-full-text { font-size:13px; color:#b8c0d8; line-height:1.5; margin-top:4px; }
 
-    /* ══════════════════════════════
-       BIN CARDS
-    ══════════════════════════════ */
-    .bin-row { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    /* ── 3DS BADGE ── */
+    .feature-badge {
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(34,211,165,.1); border:1px solid rgba(34,211,165,.3);
+      border-radius:999px; padding:5px 12px;
+      font-size:12px; font-weight:600; color:#6ee7b7; margin-top:14px;
+    }
+
+    /* ── BIN CARDS ── */
+    .bin-row { display:flex; flex-direction:column; gap:10px; margin-top:18px; }
     .bin-card {
-      background: linear-gradient(135deg, #15104a, #1e1a54);
-      border: 1px solid rgba(108,99,255,.3);
-      border-radius: 14px;
-      padding: 16px 18px;
-      display: flex; align-items: center; gap: 16px;
+      background:linear-gradient(135deg,#15104a,#1e1a54);
+      border:1px solid rgba(108,99,255,.3); border-radius:14px;
+      padding:16px 18px; display:flex; align-items:center; gap:16px;
     }
-    .bin-left { flex: 1; }
-    .bin-flag  { font-size: 26px; }
-    .bin-currency { font-size: 20px; font-weight: 800; color: #fff; margin-top: 2px; }
-    .bin-network  { font-size: 11px; color: var(--accent2); margin-top: 1px; }
-    .bin-number   { font-family: monospace; font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .bin-left { flex:1; }
+    .bin-flag     { font-size:26px; }
+    .bin-currency { font-size:20px; font-weight:800; color:#fff; margin-top:2px; }
+    .bin-network  { font-size:11px; color:var(--accent2); margin-top:1px; }
+    .bin-number   { font-family:monospace; font-size:13px; color:var(--muted); margin-top:2px; }
 
-    /* ══════════════════════════════
-       STEPS
-    ══════════════════════════════ */
-    .steps { display: flex; flex-direction: column; }
-    .step  { display: flex; gap: 14px; padding-bottom: 22px; }
-    .step:last-child { padding-bottom: 0; }
-    .step-left { display: flex; flex-direction: column; align-items: center; }
+    /* ── STEPS ── */
+    .steps { display:flex; flex-direction:column; }
+    .step  { display:flex; gap:14px; padding-bottom:22px; }
+    .step:last-child { padding-bottom:0; }
+    .step-left { display:flex; flex-direction:column; align-items:center; }
     .step-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 13px; color: #fff; flex-shrink: 0;
+      width:32px; height:32px; border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:13px; color:#fff; flex-shrink:0;
     }
-    .step-line {
-      width: 2px; flex: 1; margin-top: 5px;
-      background: linear-gradient(to bottom, rgba(108,99,255,.35), transparent);
-    }
-    .step:last-child .step-line { display: none; }
-    .step-content { padding-top: 4px; flex: 1; }
-    .step-title { font-weight: 600; color: #fff; margin-bottom: 5px; font-size: 14px; }
-    .step-desc  { font-size: 13px; color: #8892ab; line-height: 1.55; }
+    .step-line { width:2px; flex:1; margin-top:5px; background:linear-gradient(to bottom,rgba(108,99,255,.35),transparent); }
+    .step:last-child .step-line { display:none; }
+    .step-content { padding-top:4px; flex:1; }
+    .step-title { font-weight:600; color:#fff; margin-bottom:5px; font-size:14px; }
+    .step-desc  { font-size:13px; color:#8892ab; line-height:1.55; }
     .step-link  {
-      display: inline-flex; align-items: center; gap: 5px;
-      color: var(--accent2); font-size: 13px;
-      text-decoration: none; margin-top: 8px; font-weight: 600;
+      display:inline-flex; align-items:center; gap:5px;
+      color:var(--accent2); font-size:13px; text-decoration:none; margin-top:8px; font-weight:600;
     }
-    .step-link:hover { text-decoration: underline; }
+    .step-link:hover { text-decoration:underline; }
 
-    /* ══════════════════════════════
-       HIGHLIGHT / WARN
-    ══════════════════════════════ */
+    /* ── HIGHLIGHT / WARN ── */
     .highlight {
-      background: rgba(108,99,255,.08);
-      border: 1px solid rgba(108,99,255,.22);
-      border-radius: 12px; padding: 13px 15px;
-      margin-top: 14px; font-size: 13px; color: #c4b5fd;
-      display: flex; gap: 9px; align-items: flex-start; line-height: 1.55;
+      background:rgba(108,99,255,.08); border:1px solid rgba(108,99,255,.22);
+      border-radius:12px; padding:13px 15px; margin-top:14px;
+      font-size:13px; color:#c4b5fd; display:flex; gap:9px; align-items:flex-start; line-height:1.55;
     }
     .warn {
-      background: rgba(251,191,36,.07);
-      border: 1px solid rgba(251,191,36,.22);
-      border-radius: 12px; padding: 13px 15px;
-      margin-top: 12px; font-size: 13px; color: #fde68a;
-      display: flex; gap: 9px; align-items: flex-start; line-height: 1.55;
+      background:rgba(251,191,36,.07); border:1px solid rgba(251,191,36,.22);
+      border-radius:12px; padding:13px 15px; margin-top:12px;
+      font-size:13px; color:#fde68a; display:flex; gap:9px; align-items:flex-start; line-height:1.55;
     }
-    .highlight .ico, .warn .ico { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+    .highlight .ico, .warn .ico { flex-shrink:0; font-size:16px; margin-top:1px; }
 
-    /* ══════════════════════════════
-       ACTION PILLS (card management)
-    ══════════════════════════════ */
-    .action-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    /* ── ACTION PILLS ── */
+    .action-row { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
     .action-pill {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 12px 14px; border-radius: 12px;
-      font-size: 13px; font-weight: 600;
+      display:flex; align-items:flex-start; gap:10px;
+      padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600;
     }
-    .pill-red   { background: rgba(248,113,113,.1);  color: #fca5a5; border: 1px solid rgba(248,113,113,.25); }
-    .pill-green { background: rgba(34,211,165,.08);  color: #6ee7b7; border: 1px solid rgba(34,211,165,.25); }
-    .pill-blue  { background: rgba(96,165,250,.08);  color: #93c5fd; border: 1px solid rgba(96,165,250,.25); }
-    .pill-desc  { font-size: 11.5px; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+    .pill-red  { background:rgba(248,113,113,.1);  color:#fca5a5; border:1px solid rgba(248,113,113,.25); }
+    .pill-green{ background:rgba(34,211,165,.08);  color:#6ee7b7; border:1px solid rgba(34,211,165,.25); }
+    .pill-blue { background:rgba(96,165,250,.08);  color:#93c5fd; border:1px solid rgba(96,165,250,.25); }
+    .pill-desc { font-size:11.5px; font-weight:400; color:var(--muted); margin-top:3px; line-height:1.45; }
 
-    /* ══════════════════════════════
-       SERVICES — DROPDOWN (desktop) / MODAL (mobile)
-    ══════════════════════════════ */
+    /* ── SERVICES TRIGGER ── */
     .svc-trigger {
-      width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 15px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; color: #fff;
-      font-size: 14px; font-weight: 600;
-      font-family: 'Inter', sans-serif;
-      transition: background .2s, border-color .2s;
+      width:100%; background:var(--surface2); border:1px solid var(--border);
+      border-radius:13px; padding:15px 18px;
+      display:flex; align-items:center; justify-content:space-between;
+      cursor:pointer; color:#fff; font-size:14px; font-weight:600;
+      font-family:'Inter',sans-serif; transition:background .2s,border-color .2s;
     }
-    .svc-trigger:hover { border-color: rgba(108,99,255,.35); background: rgba(108,99,255,.07); }
-    .svc-trigger .left { display: flex; align-items: center; gap: 10px; }
+    .svc-trigger:hover { border-color:rgba(108,99,255,.35); background:rgba(108,99,255,.07); }
+    .svc-trigger .left { display:flex; align-items:center; gap:10px; }
     .svc-count {
-      background: rgba(108,99,255,.2); color: var(--accent2);
-      padding: 3px 9px; border-radius: 999px; font-size: 11px;
+      background:rgba(108,99,255,.2); color:var(--accent2);
+      padding:3px 9px; border-radius:999px; font-size:11px;
     }
     .svc-arrow {
-      width: 24px; height: 24px; border-radius: 50%;
-      background: rgba(108,99,255,.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--accent2);
-      transition: transform .3s;
+      width:24px; height:24px; border-radius:50%;
+      background:rgba(108,99,255,.15);
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; color:var(--accent2); transition:transform .3s;
     }
-    .svc-trigger.open .svc-arrow { transform: rotate(180deg); }
+    .svc-trigger.open .svc-arrow { transform:rotate(180deg); }
 
-    /* Desktop dropdown */
+    /* ── DESKTOP DROPDOWN ── */
     .svc-dropdown {
-      display: none;
-      margin-top: 10px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      overflow: hidden;
+      margin-top:10px; background:var(--surface2);
+      border:1px solid var(--border); border-radius:13px; overflow:hidden;
+      display:none;
     }
-    .svc-dropdown.open { display: block; }
-    .svc-search-wrap {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-    }
+    .svc-dropdown.open { display:block; }
+    .svc-search-wrap { padding:12px 14px; border-bottom:1px solid var(--border); }
     .svc-search-wrap input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 9px 13px;
-      color: var(--text); font-size: 14px;
-      outline: none; font-family: 'Inter', sans-serif;
-      transition: border-color .2s;
+      width:100%; background:var(--bg); border:1px solid var(--border);
+      border-radius:8px; padding:9px 13px; color:var(--text);
+      font-size:14px; outline:none; font-family:'Inter',sans-serif; transition:border-color .2s;
     }
-    .svc-search-wrap input::placeholder { color: var(--muted); }
-    .svc-search-wrap input:focus { border-color: rgba(108,99,255,.5); }
-
+    .svc-search-wrap input::placeholder { color:var(--muted); }
+    .svc-search-wrap input:focus { border-color:rgba(108,99,255,.5); }
     .svc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      max-height: 380px; overflow-y: auto;
-      padding: 6px;
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+      max-height:380px; overflow-y:auto; padding:6px;
     }
-    .svc-grid::-webkit-scrollbar { width: 4px; }
-    .svc-grid::-webkit-scrollbar-thumb { background: rgba(108,99,255,.3); border-radius: 4px; }
+    .svc-grid::-webkit-scrollbar { width:4px; }
+    .svc-grid::-webkit-scrollbar-thumb { background:rgba(108,99,255,.3); border-radius:4px; }
 
-    /* Mobile full-screen modal */
+    /* ── MOBILE MODAL ── */
     .svc-modal {
-      position: fixed; inset: 0; z-index: 200;
-      display: none; flex-direction: column;
-      background: var(--bg);
+      position:fixed; inset:0; z-index:200;
+      display:none; flex-direction:column; background:var(--bg);
     }
-    .svc-modal.open { display: flex; }
+    .svc-modal.open { display:flex; animation:modalSlide .28s cubic-bezier(.32,1,.4,1); }
+    @keyframes modalSlide { from{opacity:0;transform:translateY(100%)} to{opacity:1;transform:translateY(0)} }
     .modal-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 20px;
-      padding-top: calc(16px + env(safe-area-inset-top, 0px));
-      border-bottom: 1px solid var(--border);
-      background: var(--surface); flex-shrink: 0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px; padding-top:calc(16px + env(safe-area-inset-top,0px));
+      border-bottom:1px solid var(--border); background:var(--surface); flex-shrink:0;
     }
-    .modal-title { font-size: 17px; font-weight: 700; color: #fff; }
+    .modal-title { font-size:17px; font-weight:700; color:#fff; }
     .modal-close {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: var(--surface2); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 16px; color: var(--muted);
+      width:34px; height:34px; border-radius:50%;
+      background:var(--surface2); border:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:16px; color:var(--muted);
     }
     .modal-search {
-      padding: 12px 16px;
-      background: var(--surface); border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      padding:12px 16px; background:var(--surface);
+      border-bottom:1px solid var(--border); flex-shrink:0;
     }
     .modal-search input {
-      width: 100%; background: var(--surface2);
-      border: 1px solid var(--border); border-radius: 12px;
-      padding: 11px 15px; color: var(--text); font-size: 15px;
-      outline: none; font-family: 'Inter', sans-serif;
+      width:100%; background:var(--surface2); border:1px solid var(--border);
+      border-radius:12px; padding:11px 15px; color:var(--text);
+      font-size:15px; outline:none; font-family:'Inter',sans-serif;
     }
-    .modal-search input::placeholder { color: var(--muted); }
-    .modal-search input:focus { border-color: rgba(108,99,255,.5); }
-    .modal-list {
-      flex: 1; overflow-y: auto; padding: 8px;
-      -webkit-overflow-scrolling: touch;
-    }
-    .modal-list::-webkit-scrollbar { display: none; }
+    .modal-search input::placeholder { color:var(--muted); }
+    .modal-search input:focus { border-color:rgba(108,99,255,.5); }
+    .modal-list { flex:1; overflow-y:auto; padding:8px; -webkit-overflow-scrolling:touch; }
+    .modal-list::-webkit-scrollbar { display:none; }
 
-    /* Shared service item */
+    /* ── SERVICE ITEM (shared) ── */
     .svc-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px; border-radius: 9px;
-      text-decoration: none; color: var(--text); font-size: 13.5px;
-      transition: background .15s; min-height: 44px;
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px; border-radius:9px;
+      text-decoration:none; color:var(--text); font-size:13.5px;
+      transition:background .15s; min-height:44px;
     }
-    .svc-item:hover, .svc-item:active { background: rgba(108,99,255,.1); }
+    .svc-item:hover,.svc-item:active { background:rgba(108,99,255,.1); }
     .svc-favicon {
-      width: 24px; height: 24px; border-radius: 7px;
-      background: rgba(255,255,255,.07);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; overflow: hidden;
+      width:24px; height:24px; border-radius:7px;
+      background:rgba(255,255,255,.07);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; overflow:hidden;
     }
-    .svc-favicon img { width: 18px; height: 18px; object-fit: contain; }
-    .svc-name   { flex: 1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .svc-domain { font-size: 11px; color: var(--muted); flex-shrink: 0; }
-    .svc-empty  { text-align: center; padding: 32px 20px; color: var(--muted); font-size: 14px; }
+    .svc-favicon img { width:18px; height:18px; object-fit:contain; }
+    .svc-name   { flex:1; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .svc-domain { font-size:11px; color:var(--muted); flex-shrink:0; }
+    .svc-empty  { text-align:center; padding:32px 20px; color:var(--muted); font-size:14px; }
 
-    /* ══════════════════════════════
-       FAQ
-    ══════════════════════════════ */
-    .faq-list { display: flex; flex-direction: column; gap: 8px; }
-    .faq-item { border: 1px solid var(--border); border-radius: 13px; overflow: hidden; }
+    /* ── FAQ ── */
+    .faq-list { display:flex; flex-direction:column; gap:8px; }
+    .faq-item { border:1px solid var(--border); border-radius:13px; overflow:hidden; }
     .faq-q {
-      padding: 15px 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; font-weight: 600; font-size: 14px; color: #fff;
-      gap: 10px; user-select: none; min-height: 50px;
+      padding:15px 16px; display:flex; align-items:center; justify-content:space-between;
+      cursor:pointer; font-weight:600; font-size:14px; color:#fff;
+      gap:10px; user-select:none; min-height:50px;
     }
-    .faq-q:hover { background: rgba(255,255,255,.03); }
-    .faq-arrow { font-size: 11px; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
-    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-q:hover { background:rgba(255,255,255,.03); }
+    .faq-arrow { font-size:11px; color:var(--muted); transition:transform .25s; flex-shrink:0; }
+    .faq-item.open .faq-arrow { transform:rotate(180deg); }
     .faq-a {
-      display: none; padding: 12px 16px 16px;
-      font-size: 13.5px; color: #8892ab; line-height: 1.6;
-      border-top: 1px solid var(--border);
+      display:none; padding:12px 16px 16px;
+      font-size:13.5px; color:#8892ab; line-height:1.6;
+      border-top:1px solid var(--border);
     }
-    .faq-item.open .faq-a { display: block; }
-    .faq-stat { color: var(--green); font-weight: 700; }
+    .faq-item.open .faq-a { display:block; }
+    .faq-stat { color:var(--green); font-weight:700; }
+    .txn-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
 
-    .txn-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 8px; margin-bottom: 12px;
-    }
-
-    /* ══════════════════════════════
-       SECTION LABEL
-    ══════════════════════════════ */
+    /* ── SECTION LABEL ── */
     .section-label {
-      font-size: 10.5px; font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase; letter-spacing: .8px;
-      padding: 2px 4px 0;
+      font-size:10.5px; font-weight:600; color:var(--muted);
+      text-transform:uppercase; letter-spacing:.8px; padding:2px 4px 0;
     }
+    .anchor { scroll-margin-top:12px; }
 
-    /* ══════════════════════════════
-       BOTTOM NAV (mobile only)
-    ══════════════════════════════ */
+    /* ── BOTTOM NAV ── */
     .bottom-nav {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
-      background: rgba(9, 11, 16, 0.93);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-top: 1px solid rgba(255,255,255,.07);
-      display: flex; align-items: flex-start;
-      padding: 0 4px;
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-      z-index: 100;
+      position:fixed; bottom:0; left:0; right:0;
+      height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));
+      background:rgba(9,11,16,.93);
+      backdrop-filter:blur(20px) saturate(180%);
+      -webkit-backdrop-filter:blur(20px) saturate(180%);
+      border-top:1px solid rgba(255,255,255,.07);
+      display:flex; align-items:flex-start;
+      padding:0 4px; padding-bottom:env(safe-area-inset-bottom,0px);
+      z-index:100;
     }
     .nav-item {
-      flex: 1;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      padding: 12px 4px 8px;
-      cursor: pointer; border: none; background: none;
-      color: var(--muted); font-size: 10px; font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      text-decoration: none; transition: color .2s;
+      flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+      padding:12px 4px 8px; cursor:pointer; border:none; background:none;
+      color:var(--muted); font-size:10px; font-weight:500;
+      font-family:'Inter',sans-serif; text-decoration:none; transition:color .2s;
     }
-    .nav-icon { font-size: 20px; line-height: 1; transition: transform .2s; }
-    .nav-item.active { color: var(--accent2); }
-    .nav-item.active .nav-icon { transform: translateY(-2px); }
+    .nav-icon { font-size:20px; line-height:1; transition:transform .2s; }
+    .nav-item.active { color:var(--accent2); }
+    .nav-item.active .nav-icon { transform:translateY(-2px); }
 
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
-    .footer {
-      text-align: center; padding: 24px 20px 10px;
-      color: var(--muted); font-size: 12.5px;
+    /* ── FOOTER ── */
+    .footer { text-align:center; padding:24px 20px 10px; color:var(--muted); font-size:12.5px; }
+    .footer a { color:var(--accent2); text-decoration:none; }
+    .footer a:hover { text-decoration:underline; }
+    .contact-box {
+      margin-top:20px; padding:16px 20px;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:14px; display:inline-block; text-align:center;
     }
-    .footer a { color: var(--accent2); text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
-
-    /* ══════════════════════════════
-       ANIMATIONS
-    ══════════════════════════════ */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .contact-label { font-size:13px; color:var(--muted); margin-bottom:8px; }
+    .contact-link {
+      display:inline-flex; align-items:center; gap:8px;
+      color:#fff; font-size:15px; font-weight:700; text-decoration:none;
     }
-    .card { animation: slideUp .35s ease both; }
-    .card:nth-child(2) { animation-delay:.05s }
-    .card:nth-child(3) { animation-delay:.10s }
-    .card:nth-child(4) { animation-delay:.15s }
-    .card:nth-child(5) { animation-delay:.20s }
-    .card:nth-child(6) { animation-delay:.25s }
-    .card:nth-child(7) { animation-delay:.30s }
-    .card:nth-child(8) { animation-delay:.35s }
-
-    @keyframes modalSlide {
-      from { opacity: 0; transform: translateY(100%); }
-      to   { opacity: 1; transform: translateY(0); }
+    .tg-icon {
+      width:32px; height:32px; border-radius:50%;
+      background:linear-gradient(135deg,#2196f3,#1565c0);
+      display:inline-flex; align-items:center; justify-content:center; font-size:16px;
     }
-    .svc-modal.open { animation: modalSlide .28s cubic-bezier(.32,1,.4,1); }
 
-    /* ══════════════════════════════
-       SCROLL OFFSET
-    ══════════════════════════════ */
-    .anchor { scroll-margin-top: 12px; }
-
-    /* ══════════════════════════════
-       ★ MOBILE  (default — up to 767px)
-    ══════════════════════════════ */
-    body { padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 16px); }
-    .hero { padding: 52px 20px 40px; }
-    .hero h1 { font-size: 30px; }
-    .hero-sub { font-size: 14px; }
-    .page-wrap { padding: 20px 14px 20px; gap: 12px; }
-    .cond-grid { grid-template-columns: 1fr 1fr; }
-    .bin-row { flex-direction: column; }
-    /* Services: show modal button, hide dropdown */
-    .svc-dropdown { display: none !important; }
-    /* Bottom nav: visible */
-    .bottom-nav { display: flex; }
-
-    /* ══════════════════════════════
-       ★ DESKTOP  (768px +)
-    ══════════════════════════════ */
+    /* ══════════ DESKTOP ══════════ */
     @media (min-width: 768px) {
-      body { padding-bottom: 0; }
+      body { padding-bottom:0; }
+      .hero { padding:80px 32px 64px; }
+      .hero h1 { font-size:clamp(32px,4vw,52px); }
+      .hero-sub { font-size:16px; }
+      .hero-badge { font-size:13px; padding:6px 18px; margin-bottom:22px; }
+      .chip { font-size:13px; padding:6px 14px; }
 
-      .hero { padding: 80px 32px 64px; }
-      .hero h1 { font-size: clamp(32px, 4vw, 52px); }
-      .hero-sub { font-size: 16px; }
-      .hero-badge { font-size: 13px; padding: 6px 18px; margin-bottom: 22px; }
-      .chip { font-size: 13px; padding: 6px 14px; }
+      .page-wrap { max-width:900px; margin:0 auto; padding:44px 28px 72px; gap:22px; }
 
-      .page-wrap {
-        max-width: 880px; margin: 0 auto;
-        padding: 44px 28px 72px; gap: 22px;
-      }
+      .card { padding:32px; border-radius:18px; }
+      .card-title { font-size:18px; }
+      .card-icon { width:44px; height:44px; font-size:20px; }
 
-      .card { padding: 32px; border-radius: 18px; }
-      .card-title { font-size: 18px; }
-      .card-icon { width: 44px; height: 44px; font-size: 20px; }
+      .cond-grid { grid-template-columns:repeat(3,1fr); gap:14px; }
+      .cond-item { padding:16px 18px; }
+      .cond-label { font-size:12px; }
+      .cond-value { font-size:18px; }
 
-      .cond-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-      .cond-item { padding: 16px 18px; }
-      .cond-label { font-size: 12px; }
-      .cond-value { font-size: 18px; }
+      .bin-row { flex-direction:row; gap:16px; }
+      .bin-card { flex:1; }
 
-      .bin-row { flex-direction: row; gap: 16px; }
-      .bin-card { flex: 1; }
+      .rule-list li { font-size:14.5px; }
+      .step-title { font-size:15px; }
+      .step-desc  { font-size:14px; }
 
-      .rule-list li { font-size: 14.5px; }
-      .step-title { font-size: 15px; }
-      .step-desc  { font-size: 14px; }
+      .action-row { flex-direction:row; flex-wrap:wrap; gap:12px; }
+      .action-pill { flex:1; min-width:180px; }
 
-      .action-row { flex-direction: row; flex-wrap: wrap; gap: 12px; }
-      .action-pill { flex: 1; min-width: 180px; }
+      .faq-q { font-size:14.5px; }
+      .faq-a  { font-size:14px; }
+      .txn-grid { grid-template-columns:repeat(4,1fr); }
 
-      .faq-q { font-size: 14.5px; }
-      .faq-a  { font-size: 14px; }
+      .section-label { font-size:11px; }
+      .bottom-nav    { display:none; }
 
-      .section-label { font-size: 11px; }
+      /* Desktop: dropdown works normally */
+      .svc-dropdown { display:none; }
+      .svc-dropdown.open { display:block; }
+    }
 
-      /* Services: use dropdown, hide modal trigger logic */
-      .svc-dropdown { /* reset the !important override */ }
-      .bottom-nav   { display: none; }
-
-      .txn-grid { grid-template-columns: repeat(4, 1fr); }
+    /* Mobile only: force hide dropdown */
+    @media (max-width: 767px) {
+      .svc-dropdown { display:none !important; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">💳 Виртуальные карты</div>
   <h1>YeezyPay<br>Инструкция для старта</h1>
@@ -586,7 +434,6 @@
   </div>
 </div>
 
-<!-- ══ CONTENT ══ -->
 <div class="page-wrap">
 
   <!-- ПРАВИЛА -->
@@ -617,18 +464,17 @@
       </div>
     </div>
 
-    <!-- Tabs -->
-    <div class="tariff-tabs">
-      <button class="tab-btn active" data-tab="basic">Базовые карты</button>
-      <button class="tab-btn" data-tab="applepay">Apple/Google Pay</button>
+    <div class="tab-switcher" id="tariffTabs">
+      <button class="tab-btn active" data-tab="basic" data-group="tariff">Basic Card</button>
+      <button class="tab-btn" data-tab="applepay" data-group="tariff">Apple / Google Pay</button>
     </div>
 
-    <!-- Базовые -->
-    <div class="tab-panel active" id="tab-basic">
+    <!-- Basic Card -->
+    <div class="tab-panel active" id="tariff-basic">
       <div class="cond-grid">
         <div class="cond-item">
           <div class="cond-label">Валюты карт</div>
-          <div class="cond-value">USD · EUR</div>
+          <div class="cond-value">$ · €</div>
         </div>
         <div class="cond-item">
           <div class="cond-label">Комиссия за пополнение</div>
@@ -636,76 +482,106 @@
         </div>
         <div class="cond-item">
           <div class="cond-label">Выпуск карты</div>
-          <div class="cond-value">2 USD/EUR</div>
+          <div class="cond-value">2 $ / 2 €</div>
         </div>
         <div class="cond-item">
           <div class="cond-label">Мин. баланс для выпуска</div>
-          <div class="cond-value">100 USD/EUR</div>
+          <div class="cond-value">100 $ / 100 €</div>
         </div>
         <div class="cond-item">
           <div class="cond-label">Мин. повторное пополнение</div>
-          <div class="cond-value">100 USD/EUR</div>
+          <div class="cond-value">100 $ / 100 €</div>
         </div>
         <div class="cond-item">
           <div class="cond-label">Макс. пополнение</div>
-          <div class="cond-value">25 000 USD/EUR</div>
+          <div class="cond-value">25 000 $ / 25 000 €</div>
         </div>
         <div class="cond-item full">
           <div class="cond-label">Конвертация USDT → USD/EUR</div>
-          <div class="cond-full-text" style="margin-top:4px;">По биржевому курсу плюс один процент</div>
+          <div class="cond-full-text">По биржевому курсу плюс один процент</div>
         </div>
       </div>
-      <div class="highlight">
+      <div class="highlight" style="margin-top:14px;">
         <span class="ico">✨</span>
-        <span>С учётом всех комиссий для выпуска одной карты потребуется <strong>107 USDT</strong></span>
+        <span>Итого для старта: <strong>105 $</strong> (или ~105 € для евро-карт)</span>
+      </div>
+      <div style="margin-top:10px;">
+        <span class="feature-badge">✅ Поддержка 3DS</span>
+      </div>
+
+      <!-- BIN Basic -->
+      <div style="margin-top:20px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">BIN карт</div>
+        <div class="bin-row">
+          <div class="bin-card">
+            <div class="bin-left">
+              <div class="bin-currency">EUR</div>
+              <div class="bin-network">MasterCard · UK</div>
+              <div class="bin-number">BIN 519769</div>
+            </div>
+            <div class="bin-flag">🇬🇧</div>
+          </div>
+          <div class="bin-card">
+            <div class="bin-left">
+              <div class="bin-currency">USD</div>
+              <div class="bin-network">VISA · UK</div>
+              <div class="bin-number">BIN 474362</div>
+            </div>
+            <div class="bin-flag">🇬🇧</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Apple Pay / Google Pay -->
-    <div class="tab-panel" id="tab-applepay">
+    <!-- Apple / Google Pay -->
+    <div class="tab-panel" id="tariff-applepay">
       <div class="cond-grid">
         <div class="cond-item">
           <div class="cond-label">Валюты карт</div>
-          <div class="cond-value">USD · EUR</div>
+          <div class="cond-value">$ · €</div>
         </div>
         <div class="cond-item">
-          <div class="cond-label">Фикс за выпуск</div>
-          <div class="cond-value">5$ / 5€</div>
-        </div>
-        <div class="cond-item">
-          <div class="cond-label">Топ-ап</div>
+          <div class="cond-label">Комиссия за пополнение (топ-ап)</div>
           <div class="cond-value">2.5%</div>
         </div>
         <div class="cond-item">
-          <div class="cond-label">Мин. пополнение</div>
-          <div class="cond-value">50$ / 50€</div>
+          <div class="cond-label">Выпуск карты</div>
+          <div class="cond-value">5 $ / 5 €</div>
+        </div>
+        <div class="cond-item">
+          <div class="cond-label">Мин. баланс для выпуска</div>
+          <div class="cond-value">50 $ / 50 €</div>
+        </div>
+        <div class="cond-item">
+          <div class="cond-label">Мин. повторное пополнение</div>
+          <div class="cond-value">50 $ / 50 €</div>
+        </div>
+        <div class="cond-item">
+          <div class="cond-label">Макс. пополнение</div>
+          <div class="cond-value">25 000 $ / 25 000 €</div>
+        </div>
+        <div class="cond-item full">
+          <div class="cond-label">Конвертация USDT → USD/EUR</div>
+          <div class="cond-full-text">По биржевому курсу плюс один процент</div>
         </div>
       </div>
-      <div class="highlight">
+      <div class="highlight" style="margin-top:14px;">
         <span class="ico">✨</span>
         <span>Итого для старта: <strong>56.25$</strong> (или ~56.25 € для евро-карт)</span>
       </div>
-    </div>
 
-    <!-- BIN -->
-    <div style="margin-top:22px;">
-      <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">BIN карт</div>
-      <div class="bin-row">
-        <div class="bin-card">
-          <div class="bin-left">
-            <div class="bin-currency">EUR</div>
-            <div class="bin-network">MasterCard · UK</div>
-            <div class="bin-number">BIN 519769</div>
+      <!-- BIN Apple Pay -->
+      <div style="margin-top:20px;">
+        <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">BIN карт</div>
+        <div class="bin-row">
+          <div class="bin-card">
+            <div class="bin-left">
+              <div class="bin-currency">EUR</div>
+              <div class="bin-network">MasterCard · UK</div>
+              <div class="bin-number">BIN 519769</div>
+            </div>
+            <div class="bin-flag">🇬🇧</div>
           </div>
-          <div class="bin-flag">🇬🇧</div>
-        </div>
-        <div class="bin-card">
-          <div class="bin-left">
-            <div class="bin-currency">USD</div>
-            <div class="bin-network">VISA · UK</div>
-            <div class="bin-number">BIN 474362</div>
-          </div>
-          <div class="bin-flag">🇬🇧</div>
         </div>
       </div>
     </div>
@@ -723,10 +599,7 @@
     </div>
     <div class="steps">
       <div class="step">
-        <div class="step-left">
-          <div class="step-num">1</div>
-          <div class="step-line"></div>
-        </div>
+        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-title">Регистрация через Telegram-бота</div>
           <div class="step-desc">Перейдите в бота и войдите в интерфейс по выданной ботом ссылке. Каждый вход осуществляется по новой ссылке от бота.</div>
@@ -734,13 +607,10 @@
         </div>
       </div>
       <div class="step">
-        <div class="step-left">
-          <div class="step-num">2</div>
-          <div class="step-line"></div>
-        </div>
+        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-title">Пополнить баланс в USDT TRC-20</div>
-          <div class="step-desc">Вкладка <strong>Deposit</strong> — адрес кошелька статичный, персонально ваш. С учётом всех комиссий для выпуска одной карты потребуется <span id="usdtAmount"><strong>107 USDT</strong> (базовая карта) или <strong>56.25 USDT</strong> (Apple/Google Pay)</span>.</div>
+          <div class="step-desc">Вкладка <strong>Deposit</strong> — адрес кошелька статичный, персонально ваш. С учётом всех комиссий для выпуска одной карты потребуется <span id="usdtAmount"><strong>107 USDT</strong> (Basic Card) или <strong>56.25 USDT</strong> (Apple/Google Pay)</span>.</div>
           <div class="warn">
             <span class="ico">⚠️</span>
             <span>Транзакции проходят через блокчейн. В случае ошибок в адресе средства будут потеряны.</span>
@@ -748,20 +618,14 @@
         </div>
       </div>
       <div class="step">
-        <div class="step-left">
-          <div class="step-num">3</div>
-          <div class="step-line"></div>
-        </div>
+        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-title">Конвертировать USDT в EUR или USD</div>
           <div class="step-desc">Вкладка <strong>Exchange</strong>. Комиссия за конвертацию — 1%, курс биржевой.</div>
         </div>
       </div>
       <div class="step">
-        <div class="step-left">
-          <div class="step-num">4</div>
-          <div class="step-line"></div>
-        </div>
+        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-title">Выпустить карту</div>
           <div class="step-desc">Вкладка <strong>Cards</strong> → выбрать EUR или USD → указать количество, при желании название и сумму пополнения → нажать <strong>Create card</strong>.</div>
@@ -783,24 +647,15 @@
     <div class="action-row">
       <div class="action-pill pill-red">
         <span>🚫</span>
-        <div>
-          <div>Block Card</div>
-          <div class="pill-desc">Карта блокируется, средства не возвращаются на аккаунт. Можно разблокировать кнопкой Restore Card.</div>
-        </div>
+        <div><div>Block Card</div><div class="pill-desc">Карта блокируется, средства не возвращаются на аккаунт. Можно разблокировать кнопкой Restore Card.</div></div>
       </div>
       <div class="action-pill pill-green">
         <span>✅</span>
-        <div>
-          <div>Restore Card</div>
-          <div class="pill-desc">Разблокировать ранее заблокированную карту и продолжить работу с ней.</div>
-        </div>
+        <div><div>Restore Card</div><div class="pill-desc">Разблокировать ранее заблокированную карту и продолжить работу с ней.</div></div>
       </div>
       <div class="action-pill pill-blue">
         <span>💳</span>
-        <div>
-          <div>Close Card</div>
-          <div class="pill-desc">Закрытие без возможности восстановления. Средства вернутся на аккаунт YeezyPay спустя 48 часов после последней транзакции. Вывод — через вкладку Payouts.</div>
-        </div>
+        <div><div>Close Card</div><div class="pill-desc">Закрытие без возможности восстановления. Средства вернутся на аккаунт YeezyPay спустя 48 часов после последней транзакции. Вывод — через вкладку Payouts.</div></div>
       </div>
     </div>
   </div>
@@ -811,7 +666,7 @@
     <div class="card-header">
       <div class="card-icon icon-purple">🌐</div>
       <div>
-        <div class="card-title">Сервисы, доступные для оплаты</div>
+        <div class="card-title">Сервисы, доступные для оплаты basic card</div>
         <div class="card-subtitle">Вайт-лист — гарантия стабильности ваших карт</div>
       </div>
     </div>
@@ -820,17 +675,14 @@
       <li><strong style="color:#6ee7b7;">EUR</strong> — без ограничений (включая такси и интернет-магазины с физическими товарами).</li>
     </ul>
 
-    <!-- Trigger button (works for both mobile modal and desktop dropdown) -->
     <button class="svc-trigger" id="svcTrigger">
       <div class="left">
-        <span>🗂</span>
-        <span>Список сервисов</span>
+        <span>🗂</span><span>Список сервисов</span>
         <span class="svc-count">70+ сервисов</span>
       </div>
       <div class="svc-arrow">▼</div>
     </button>
 
-    <!-- Desktop dropdown -->
     <div class="svc-dropdown" id="svcDropdown">
       <div class="svc-search-wrap">
         <input type="text" id="desktopSearch" placeholder="🔍  Найти сервис..." autocomplete="off">
@@ -854,62 +706,108 @@
         <div class="card-subtitle">FAQ</div>
       </div>
     </div>
-    <div class="faq-list">
 
-      <div class="faq-item">
-        <div class="faq-q">Сколько карт можно выпустить? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">Количество карт <strong class="faq-stat">не ограничено</strong>.</div>
-      </div>
+    <div class="tab-switcher" id="faqTabs">
+      <button class="tab-btn active" data-tab="basic" data-group="faq">Basic Card</button>
+      <button class="tab-btn" data-tab="applepay" data-group="faq">Apple / Google Pay</button>
+    </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Сколько транзакций можно проводить? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">
-          <div class="txn-grid">
-            <div class="cond-item"><div class="cond-label">В день</div><div class="cond-value faq-stat">500</div></div>
-            <div class="cond-item"><div class="cond-label">В месяц</div><div class="cond-value faq-stat">5 000</div></div>
-            <div class="cond-item"><div class="cond-label">В год</div><div class="cond-value faq-stat">60 000</div></div>
-            <div class="cond-item"><div class="cond-label">Макс. по 1 транзакции</div><div class="cond-value faq-stat" style="font-size:14px;">25 000 EUR</div></div>
-          </div>
-          Жизненный цикл — до окончания срока действия или до общей суммы расходов <strong>400 000 USD/EUR</strong> по одной карте (провайдер может изменить эту сумму в одностороннем порядке).
+    <!-- FAQ Basic Card -->
+    <div class="tab-panel active" id="faq-basic">
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q">Для чего лучше всего подходит Basic Card? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Basic Card лучше всего подходит для оплат и подписок онлайн-сервисов: ИИ (ChatGPT и др.), рекламных кабинетов, хостингов, доменов, SaaS-инструментов и прочего.</div>
         </div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Возможно получить выписку по истории транзакций? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">Есть возможность скачать выписку из личного кабинета YeezyPay на вкладке <strong>History</strong>.</div>
-      </div>
+        <div class="faq-item">
+          <div class="faq-q">Сколько карт можно выпустить? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Количество карт <strong class="faq-stat">не ограничено</strong>.</div>
+        </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Почему нельзя оплатить любой сервис? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">Это обусловлено комплаенс-рисками банков, в которых выпускаются карты. Совершение платежей по нецелевым сервисам несёт риск бана карт до тех пор, пока банк не завершит проверку. Наличие вайт-листа — гарантия стабильности работы ваших карт.</div>
-      </div>
+        <div class="faq-item">
+          <div class="faq-q">Сколько транзакций можно проводить? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">
+            <div class="txn-grid">
+              <div class="cond-item"><div class="cond-label">В день</div><div class="cond-value faq-stat">500</div></div>
+              <div class="cond-item"><div class="cond-label">В месяц</div><div class="cond-value faq-stat">5 000</div></div>
+              <div class="cond-item"><div class="cond-label">В год</div><div class="cond-value faq-stat">60 000</div></div>
+              <div class="cond-item"><div class="cond-label">Макс. по 1 транзакции</div><div class="cond-value faq-stat" style="font-size:14px;">25 000 EUR</div></div>
+            </div>
+            Жизненный цикл — до окончания срока действия или до общей суммы расходов <strong>400 000 USD/EUR</strong> по одной карте (провайдер может изменить эту сумму в одностороннем порядке).
+          </div>
+        </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Поддерживают ли карты 3DS? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">Да, код будет направлен в бота и отобразится в интерфейсе во всплывающем уведомлении. Можно выбирать верификацию по телефону или по email.</div>
-      </div>
+        <div class="faq-item">
+          <div class="faq-q">Возможно получить выписку по истории транзакций? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Есть возможность скачать выписку из личного кабинета YeezyPay на вкладке <strong>History</strong>.</div>
+        </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Можно ли привязать карту к Apple Pay / Google Pay? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">Нет, привязка карт к сервисам оплаты не поддерживается.</div>
-      </div>
+        <div class="faq-item">
+          <div class="faq-q">Почему нельзя оплатить любой сервис? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Это обусловлено комплаенс-рисками банков, в которых выпускаются карты, а также мерчантами магазинов приёма средств. Совершение платежей по нецелевым сервисам несёт риск бана карт до тех пор, пока банк не завершит проверку. Наличие вайт-листа — гарантия стабильности работы ваших карт.</div>
+        </div>
 
-      <div class="faq-item">
-        <div class="faq-q">Где смотреть реквизиты карты? <span class="faq-arrow">▼</span></div>
-        <div class="faq-a">У карт нет привязки к конкретным реквизитам. Обычно указывают те, на которые оформлен аккаунт/личный кабинет, к которому привязывают карту.</div>
-      </div>
+        <div class="faq-item">
+          <div class="faq-q">Поддерживают ли карты 3DS? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Да, код будет направлен в бота и отобразится в интерфейсе во всплывающем уведомлении. Можно выбирать верификацию по телефону или по email.</div>
+        </div>
 
+        <div class="faq-item">
+          <div class="faq-q">Где смотреть реквизиты карты? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">У карт нет привязки к конкретным реквизитам. Обычно указывают те, на которые оформлен аккаунт/личный кабинет, к которому привязывают карту.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FAQ Apple / Google Pay -->
+    <div class="tab-panel" id="faq-applepay">
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q">Для чего подходят Apple / Google Pay карты? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Карты Apple / Google Pay идеально подходят для ежедневных офлайн-покупок в магазинах — достаточно просто приложить телефон или часы к терминалу. Также подходят для онлайн-оплат в интернет-магазинах и сервисах без ограничений.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Можно ли оплачивать в офлайн-магазинах? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Да. Карты EUR без ограничений — подходят для супермаркетов, кафе, заправок, такси и любых POS-терминалов. Достаточно добавить карту в Apple Wallet или Google Wallet.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Чем отличается от Basic Card? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Basic Card подходит для онлайн-сервисов и подписок (реклама, ИИ, хостинги). Apple/Google Pay карты — для повседневных покупок офлайн.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Сколько карт можно выпустить? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Количество карт <strong class="faq-stat">не ограничено</strong>.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Поддерживают ли карты 3DS? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Нет. Apple / Google Pay карты не поддерживают 3DS-верификацию. Если вам нужна поддержка 3DS — используйте Basic Card.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Возможно получить выписку по транзакциям? <span class="faq-arrow">▼</span></div>
+          <div class="faq-a">Есть возможность скачать выписку из личного кабинета YeezyPay на вкладке <strong>History</strong>.</div>
+        </div>
+
+      </div>
     </div>
   </div>
 
   <!-- FOOTER -->
   <div class="footer">
-    <p>YeezyPay · Февраль 2023</p>
+    <p>YeezyPay 2026</p>
     <p style="margin-top:6px;"><a href="https://t.me/Yeezypaybot">→ @Yeezypaybot</a></p>
-    <div style="margin-top:20px; padding:16px 20px; background:var(--surface); border:1px solid var(--border); border-radius:14px; display:inline-block; text-align:center;">
-      <div style="font-size:13px; color:var(--muted); margin-bottom:6px;">Есть вопросы?</div>
-      <a href="https://t.me/jaxonmorrison" target="_blank" style="display:inline-flex; align-items:center; gap:8px; color:#fff; font-size:15px; font-weight:700; text-decoration:none;">
-        <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2196f3,#1565c0);display:inline-flex;align-items:center;justify-content:center;font-size:16px;">✈️</span>
+    <div class="contact-box">
+      <div class="contact-label">Есть вопросы?</div>
+      <a class="contact-link" href="https://t.me/jaxonmorrison" target="_blank">
+        <span class="tg-icon">✈️</span>
         @jaxonmorrison
       </a>
     </div>
@@ -917,26 +815,16 @@
 
 </div><!-- /page-wrap -->
 
-<!-- ══ MOBILE BOTTOM NAV ══ -->
+<!-- BOTTOM NAV (mobile) -->
 <nav class="bottom-nav">
-  <a class="nav-item active" href="#sec-rules">
-    <span class="nav-icon">🛡</span><span>Правила</span>
-  </a>
-  <a class="nav-item" href="#sec-rates">
-    <span class="nav-icon">💰</span><span>Тарифы</span>
-  </a>
-  <a class="nav-item" href="#sec-start">
-    <span class="nav-icon">🚀</span><span>Старт</span>
-  </a>
-  <a class="nav-item" href="#sec-services">
-    <span class="nav-icon">🌐</span><span>Сервисы</span>
-  </a>
-  <a class="nav-item" href="#sec-faq">
-    <span class="nav-icon">❓</span><span>FAQ</span>
-  </a>
+  <a class="nav-item active" href="#sec-rules"><span class="nav-icon">🛡</span><span>Правила</span></a>
+  <a class="nav-item" href="#sec-rates"><span class="nav-icon">💰</span><span>Тарифы</span></a>
+  <a class="nav-item" href="#sec-start"><span class="nav-icon">🚀</span><span>Старт</span></a>
+  <a class="nav-item" href="#sec-services"><span class="nav-icon">🌐</span><span>Сервисы</span></a>
+  <a class="nav-item" href="#sec-faq"><span class="nav-icon">❓</span><span>FAQ</span></a>
 </nav>
 
-<!-- ══ MOBILE FULL-SCREEN SERVICES MODAL ══ -->
+<!-- MOBILE MODAL -->
 <div class="svc-modal" id="svcModal">
   <div class="modal-header">
     <div class="modal-title">🌐 Сервисы для оплаты</div>
@@ -949,137 +837,82 @@
 </div>
 
 <script>
-/* ──────────────────────────────
-   DATA
-─────────────────────────────── */
+/* ── SERVICES DATA ── */
 const services = [
-  { name: 'Facebook',           url: 'https://ru-ru.facebook.com' },
-  { name: 'TikTok',             url: 'https://www.tiktok.com' },
-  { name: 'TikTok Ads',         url: 'https://ads.tiktok.com' },
-  { name: 'Google LLC',         url: 'https://www.google.com' },
-  { name: 'Google',             url: 'https://www.google.com' },
-  { name: 'Keitaro',            url: 'https://keitaro.io' },
-  { name: 'DigitalOcean',       url: 'https://www.digitalocean.com' },
-  { name: 'GlobalTelehost',     url: 'http://globaltelehost.com' },
-  { name: 'McHost',             url: 'https://mchost.ru' },
-  { name: 'AppsFlyer',          url: 'https://www.appsflyer.com' },
-  { name: 'FastSpring',         url: 'https://fastspring.com' },
-  { name: 'Apple UK',           url: 'https://www.apple.com' },
-  { name: 'PropellerAds',       url: 'https://propellerads.com' },
-  { name: 'SOAX',               url: 'https://soax.com' },
-  { name: 'Hetzner',            url: 'https://www.hetzner.com' },
-  { name: 'Detikcom',           url: 'https://www.detik.com' },
-  { name: 'Ionos',              url: 'https://www.ionos.com' },
-  { name: 'GetUniq',            url: 'https://getuniq.me' },
-  { name: 'Hostzealot',         url: 'https://hostzealot.ru' },
-  { name: 'ExoClick',           url: 'https://www.exoclick-adb.com' },
-  { name: 'Zomro',              url: 'https://zomro.com' },
-  { name: 'Apple US',           url: 'https://www.apple.com' },
-  { name: 'Jotform',            url: 'https://www.jotform.com' },
-  { name: 'MountProxies',       url: 'https://mountproxies.com' },
-  { name: 'Zadarma',            url: 'https://zadarma.com' },
-  { name: 'OVHcloud',           url: 'https://www.ovhcloud.com' },
-  { name: 'Deal Delivery Gurus',url: 'http://dealdelivergurus.com' },
-  { name: 'Ahrefs',             url: 'https://ahrefs.com' },
-  { name: 'GoDaddy',            url: 'https://www.godaddy.com' },
-  { name: 'Paddle',             url: 'https://www.paddle.com' },
-  { name: 'PayPal',             url: 'https://www.paypal.com' },
-  { name: 'Synthesia',          url: 'https://www.synthesia.io' },
-  { name: 'Scaleway',           url: 'https://www.scaleway.com' },
-  { name: 'Propeller Ads',      url: 'https://propellerads.com' },
-  { name: 'Amazon',             url: 'https://www.amazon.com' },
-  { name: 'Tilda',              url: 'https://tilda.cc' },
-  { name: 'Atlassian',          url: 'https://www.atlassian.com' },
-  { name: 'Outbrain',           url: 'https://www.outbrain.com' },
-  { name: 'Upwork',             url: 'https://www.upwork.com' },
-  { name: 'Remini Web',         url: 'https://app.remini.ai' },
-  { name: 'NapoleonCat',        url: 'https://napoleoncat.com' },
-  { name: 'IsHosting',          url: 'https://ishosting.com' },
-  { name: 'Octo Browser',       url: 'https://octobrowser.net' },
-  { name: 'Shopify',            url: 'https://www.shopify.com' },
-  { name: 'Dolphin Anty',       url: 'https://dolphin-anty.com' },
-  { name: 'Mullvad VPN',        url: 'https://mullvad.net' },
-  { name: 'Freepik',            url: 'https://www.freepikcompany.com' },
-  { name: 'Netim',              url: 'https://www.netim.com' },
-  { name: 'OpenProvider',       url: 'https://www.openprovider.com' },
-  { name: 'OVH',                url: 'https://www.ovhcloud.com' },
-  { name: 'BuyProxies',         url: 'https://buyproxies.org' },
-  { name: 'Proton',             url: 'https://proton.me' },
-  { name: 'Zoho Corp',          url: 'https://www.zohocorp.com' },
-  { name: 'Ikoula',             url: 'https://www.ikoula.com' },
-  { name: 'Names.co.uk',        url: 'https://www.names.co.uk' },
-  { name: 'Qonto',              url: 'https://qonto.com' },
-  { name: 'Taboola',            url: 'https://www.taboola.com' },
-  { name: 'PayPro',             url: 'https://paypro.su' },
-  { name: 'Borcov Group',       url: 'https://borcov.group' },
-  { name: 'Hostpoint AG',       url: 'https://www.hostpoint.ch' },
-  { name: 'Vision Net',         url: 'https://vision.net' },
-  { name: 'NordLayer',          url: 'https://nordlayer.com' },
-  { name: 'iubenda',            url: 'https://www.iubenda.com' },
-  { name: 'AdSpy',              url: 'https://www.adspy.com' },
-  { name: 'Microsoft',          url: 'https://www.microsoft.com' },
-  { name: 'AVG Technologies',   url: 'https://support.avg.com' },
-  { name: 'GetCourse',          url: 'https://getcourse.ru' },
-  { name: 'Unity',              url: 'https://unity.com' },
-  { name: 'Slack',              url: 'https://slack.com' },
-  { name: 'Maxon Computer',     url: 'https://www.maxon.net' },
-  { name: 'SendPulse',          url: 'https://sendpulse.com' },
-  { name: 'LinkedIn',           url: 'https://ru.linkedin.com' },
+  {name:'Facebook',url:'https://ru-ru.facebook.com'},{name:'TikTok',url:'https://www.tiktok.com'},
+  {name:'TikTok Ads',url:'https://ads.tiktok.com'},{name:'Google LLC',url:'https://www.google.com'},
+  {name:'Google',url:'https://www.google.com'},{name:'Keitaro',url:'https://keitaro.io'},
+  {name:'DigitalOcean',url:'https://www.digitalocean.com'},{name:'GlobalTelehost',url:'http://globaltelehost.com'},
+  {name:'McHost',url:'https://mchost.ru'},{name:'AppsFlyer',url:'https://www.appsflyer.com'},
+  {name:'FastSpring',url:'https://fastspring.com'},{name:'Apple UK',url:'https://www.apple.com'},
+  {name:'PropellerAds',url:'https://propellerads.com'},{name:'SOAX',url:'https://soax.com'},
+  {name:'Hetzner',url:'https://www.hetzner.com'},{name:'Detikcom',url:'https://www.detik.com'},
+  {name:'Ionos',url:'https://www.ionos.com'},{name:'GetUniq',url:'https://getuniq.me'},
+  {name:'Hostzealot',url:'https://hostzealot.ru'},{name:'ExoClick',url:'https://www.exoclick-adb.com'},
+  {name:'Zomro',url:'https://zomro.com'},{name:'Apple US',url:'https://www.apple.com'},
+  {name:'Jotform',url:'https://www.jotform.com'},{name:'MountProxies',url:'https://mountproxies.com'},
+  {name:'Zadarma',url:'https://zadarma.com'},{name:'OVHcloud',url:'https://www.ovhcloud.com'},
+  {name:'Deal Delivery Gurus',url:'http://dealdelivergurus.com'},{name:'Ahrefs',url:'https://ahrefs.com'},
+  {name:'GoDaddy',url:'https://www.godaddy.com'},{name:'Paddle',url:'https://www.paddle.com'},
+  {name:'PayPal',url:'https://www.paypal.com'},{name:'Synthesia',url:'https://www.synthesia.io'},
+  {name:'Scaleway',url:'https://www.scaleway.com'},{name:'Propeller Ads',url:'https://propellerads.com'},
+  {name:'Amazon',url:'https://www.amazon.com'},{name:'Tilda',url:'https://tilda.cc'},
+  {name:'Atlassian',url:'https://www.atlassian.com'},{name:'Outbrain',url:'https://www.outbrain.com'},
+  {name:'Upwork',url:'https://www.upwork.com'},{name:'Remini Web',url:'https://app.remini.ai'},
+  {name:'NapoleonCat',url:'https://napoleoncat.com'},{name:'IsHosting',url:'https://ishosting.com'},
+  {name:'Octo Browser',url:'https://octobrowser.net'},{name:'Shopify',url:'https://www.shopify.com'},
+  {name:'Dolphin Anty',url:'https://dolphin-anty.com'},{name:'Mullvad VPN',url:'https://mullvad.net'},
+  {name:'Freepik',url:'https://www.freepikcompany.com'},{name:'Netim',url:'https://www.netim.com'},
+  {name:'OpenProvider',url:'https://www.openprovider.com'},{name:'OVH',url:'https://www.ovhcloud.com'},
+  {name:'BuyProxies',url:'https://buyproxies.org'},{name:'Proton',url:'https://proton.me'},
+  {name:'Zoho Corp',url:'https://www.zohocorp.com'},{name:'Ikoula',url:'https://www.ikoula.com'},
+  {name:'Names.co.uk',url:'https://www.names.co.uk'},{name:'Qonto',url:'https://qonto.com'},
+  {name:'Taboola',url:'https://www.taboola.com'},{name:'PayPro',url:'https://paypro.su'},
+  {name:'Borcov Group',url:'https://borcov.group'},{name:'Hostpoint AG',url:'https://www.hostpoint.ch'},
+  {name:'Vision Net',url:'https://vision.net'},{name:'NordLayer',url:'https://nordlayer.com'},
+  {name:'iubenda',url:'https://www.iubenda.com'},{name:'AdSpy',url:'https://www.adspy.com'},
+  {name:'Microsoft',url:'https://www.microsoft.com'},{name:'AVG Technologies',url:'https://support.avg.com'},
+  {name:'GetCourse',url:'https://getcourse.ru'},{name:'Unity',url:'https://unity.com'},
+  {name:'Slack',url:'https://slack.com'},{name:'Maxon Computer',url:'https://www.maxon.net'},
+  {name:'SendPulse',url:'https://sendpulse.com'},{name:'LinkedIn',url:'https://ru.linkedin.com'},
 ];
 
-function getDomain(url) {
-  try { return new URL(url).hostname.replace('www.', ''); }
-  catch { return url; }
+function getDomain(url){try{return new URL(url).hostname.replace('www.','')}catch{return url}}
+
+function makeItem(s){
+  const d=getDomain(s.url);
+  return `<a class="svc-item" href="${s.url}" target="_blank" rel="noopener">
+    <div class="svc-favicon"><img src="https://www.google.com/s2/favicons?domain=${d}&sz=32" alt="" onerror="this.style.display='none'"></div>
+    <span class="svc-name">${s.name}</span>
+    <span class="svc-domain">${d}</span>
+  </a>`;
 }
 
-function makeItem(s) {
-  const d = getDomain(s.url);
-  return `
-    <a class="svc-item" href="${s.url}" target="_blank" rel="noopener">
-      <div class="svc-favicon">
-        <img src="https://www.google.com/s2/favicons?domain=${d}&sz=32" alt="" onerror="this.style.display='none'">
-      </div>
-      <span class="svc-name">${s.name}</span>
-      <span class="svc-domain">${d}</span>
-    </a>`;
+function filterSvc(q){
+  const lq=q.toLowerCase();
+  return services.filter(s=>s.name.toLowerCase().includes(lq)||getDomain(s.url).includes(lq));
 }
 
-function filter(q) {
-  const lq = q.toLowerCase();
-  return services.filter(s =>
-    s.name.toLowerCase().includes(lq) || getDomain(s.url).includes(lq)
-  );
+function renderDesktop(q=''){
+  const r=filterSvc(q);
+  document.getElementById('desktopGrid').innerHTML=r.length?r.map(makeItem).join(''):'<div class="svc-empty">Сервис не найден</div>';
 }
-
-function renderDesktop(q = '') {
-  const res = filter(q);
-  document.getElementById('desktopGrid').innerHTML = res.length
-    ? res.map(makeItem).join('')
-    : '<div class="svc-empty">Сервис не найден</div>';
+function renderMobile(q=''){
+  const r=filterSvc(q);
+  document.getElementById('mobileList').innerHTML=r.length?r.map(makeItem).join(''):'<div class="svc-empty">Сервис не найден</div>';
 }
+renderDesktop(); renderMobile();
 
-function renderMobile(q = '') {
-  const res = filter(q);
-  document.getElementById('mobileList').innerHTML = res.length
-    ? res.map(makeItem).join('')
-    : '<div class="svc-empty">Сервис не найден</div>';
-}
+/* ── SERVICES TOGGLE ── */
+function isMobile(){return window.innerWidth<768}
+const trigger  = document.getElementById('svcTrigger');
+const dropdown = document.getElementById('svcDropdown');
+const modal    = document.getElementById('svcModal');
 
-renderDesktop();
-renderMobile();
-
-/* ── Detect mobile vs desktop ── */
-function isMobile() { return window.innerWidth < 768; }
-
-/* ── Trigger button ── */
-const trigger   = document.getElementById('svcTrigger');
-const dropdown  = document.getElementById('svcDropdown');
-const modal     = document.getElementById('svcModal');
-
-trigger.addEventListener('click', () => {
-  if (isMobile()) {
+trigger.addEventListener('click',()=>{
+  if(isMobile()){
     modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow='hidden';
     document.getElementById('mobileSearch').focus();
   } else {
     const open = dropdown.classList.toggle('open');
@@ -1087,78 +920,74 @@ trigger.addEventListener('click', () => {
   }
 });
 
-/* ── Desktop search ── */
-document.getElementById('desktopSearch').addEventListener('input', e => renderDesktop(e.target.value));
-
-/* ── Mobile modal close ── */
-document.getElementById('svcClose').addEventListener('click', closeModal);
-function closeModal() {
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-/* ── Mobile search ── */
-document.getElementById('mobileSearch').addEventListener('input', e => renderMobile(e.target.value));
-
-/* ── FAQ accordion ── */
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const item = q.closest('.faq-item');
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-    if (!wasOpen) item.classList.add('open');
-  });
+document.getElementById('desktopSearch').addEventListener('input',e=>renderDesktop(e.target.value));
+document.getElementById('svcClose').addEventListener('click',()=>{
+  modal.classList.remove('open'); document.body.style.overflow='';
 });
-
-/* ── Tariff tabs ── */
-const usdtAmountEl = document.getElementById('usdtAmount');
-const amountByTab = {
-  basic:    '<strong>107 USDT</strong>',
-  applepay: '<strong>56.25 USDT</strong>',
-};
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-
-    // Update the USDT amount in Quick Start step 2
-    const tab = btn.dataset.tab;
-    usdtAmountEl.innerHTML = amountByTab[tab] || amountByTab.basic;
-
-    // Animate the change
-    usdtAmountEl.style.transition = 'opacity .15s';
-    usdtAmountEl.style.opacity = '0';
-    setTimeout(() => { usdtAmountEl.style.opacity = '1'; }, 150);
-  });
-});
-
-/* ── Bottom nav active highlight ── */
-const navItems = document.querySelectorAll('.nav-item');
-const sectionIds = ['sec-rules','sec-rates','sec-start','sec-manage','sec-services','sec-faq'];
-
-function updateNav() {
-  let current = sectionIds[0];
-  sectionIds.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top < window.innerHeight * 0.55) current = id;
-  });
-  navItems.forEach(n => {
-    const href = (n.getAttribute('href') || '').replace('#', '');
-    n.classList.toggle('active', href === current);
-  });
-}
-window.addEventListener('scroll', updateNav, { passive: true });
-
-/* ── Close dropdown on outside click ── */
-document.addEventListener('click', e => {
-  if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
-    dropdown.classList.remove('open');
-    trigger.classList.remove('open');
+document.getElementById('mobileSearch').addEventListener('input',e=>renderMobile(e.target.value));
+document.addEventListener('click',e=>{
+  if(!trigger.contains(e.target)&&!dropdown.contains(e.target)){
+    dropdown.classList.remove('open'); trigger.classList.remove('open');
   }
 });
+
+/* ── UNIVERSAL TAB SWITCHER ── */
+const usdtAmountEl = document.getElementById('usdtAmount');
+const usdtByTab = {
+  basic:    '<strong>107 USDT</strong> (Basic Card)',
+  applepay: '<strong>56.25 USDT</strong> (Apple/Google Pay)',
+};
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const group = btn.dataset.group;
+    const tab   = btn.dataset.tab;
+
+    // Deactivate all buttons + panels in this group
+    document.querySelectorAll(`.tab-btn[data-group="${group}"]`).forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll(`[id^="${group}-"]`).forEach(p=>p.classList.remove('active'));
+
+    btn.classList.add('active');
+    document.getElementById(`${group}-${tab}`).classList.add('active');
+
+    // Sync USDT amount in Quick Start if tariff tab changed
+    if(group==='tariff'){
+      usdtAmountEl.style.opacity='0';
+      setTimeout(()=>{
+        usdtAmountEl.innerHTML = usdtByTab[tab] || usdtByTab.basic;
+        usdtAmountEl.style.transition='opacity .2s';
+        usdtAmountEl.style.opacity='1';
+      },150);
+    }
+  });
+});
+
+/* ── FAQ ACCORDION (scoped per panel) ── */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item   = q.closest('.faq-item');
+    const panel  = q.closest('.tab-panel');
+    const wasOpen= item.classList.contains('open');
+    panel.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ── BOTTOM NAV HIGHLIGHT ── */
+const navItems  = document.querySelectorAll('.nav-item');
+const secIds    = ['sec-rules','sec-rates','sec-start','sec-manage','sec-services','sec-faq'];
+function updateNav(){
+  let cur=secIds[0];
+  secIds.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<window.innerHeight*.55) cur=id;
+  });
+  navItems.forEach(n=>{
+    const href=(n.getAttribute('href')||'').replace('#','');
+    n.classList.toggle('active',href===cur);
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
 </script>
 </body>
 </html>
